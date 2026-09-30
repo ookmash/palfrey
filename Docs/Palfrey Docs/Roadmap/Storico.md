@@ -31,3 +31,10 @@ Storia precedente al 30/9/2026: non conservata — i sei documenti originali del
 - [[R7|Cancellazione definitiva del ciphertext]] riqualificata come procedura operativa, non crittografica, e chiusa con il Purge History API di Synapse/Matrix come precedente diretto; sblocca parzialmente [[D9|Autorizzazione dello snapshot e compattazione]] (autorizza il proprietario dello space, meccanica di sync ancora da design).
 - [[R3|Autorizzazione dispositivo dalla radice]]: aggiunta una terza pista (BIP-32/BIP-39) per la persistenza zero della radice; verificato e scartato il paper key di Keybase (stessa famiglia del cross-signing Matrix, non una radice privilegiata). Resta Da design, non decisa.
 - Nuove note Fonti: [[R6 — indirizzamento del ciphertext]], [[R7 — precedente operativo per la cancellazione]].
+
+### Bootstrap del repository
+
+- Eseguito [[Bootstrap-repository|Bootstrap del repository]] (passo 8): [github.com/ookmash/palfrey](https://github.com/ookmash/palfrey), pubblico, non annunciato, branch di default `main`. Identità dei commit impostata a livello di repository (non globale): `ookmash <ookmash@users.noreply.github.com>`.
+- Commit iniziale: vault più scaffold minimo — `LICENSE` (MPL-2.0, testo verificato da mozilla.org, corrispondenza byte-per-byte con la copia SPDX), `README.md`, `.gitignore`, due workflow CI. `.obsidian/` escluso dal repository: `mcp-tools-istefox/data.json` conteneva un bearer token live del transport MCP locale, mai arrivato al commit.
+- CI: `vault-links.yml` (controllo link rotti nel vault via `scripts/check_vault_links.py`, testato in positivo e in negativo prima del commit) e `adr-code-separation.yml` (rifiuta una PR che tocca insieme `Decisioni/` e codice, come richiesto da [[Governance]]) — entrambe con `actions/checkout` pinnato al commit esatto, non a un tag mobile. Prima esecuzione reale su GitHub Actions dopo il push: verde.
+- Nessun crate Rust o package TS ancora — arrivano con [[Piattaforma-e-primitivi]] insieme al primo codice reale con test, non come scaffolding vuoto anticipato.
