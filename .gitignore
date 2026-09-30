@@ -1,0 +1,18 @@
+# Obsidian — config locale del vault, mai versionata (può contenere token/percorsi locali)
+Docs/Palfrey Docs/.obsidian/
+
+# Claude Code — impostazioni locali della macchina, non condivise
+.claude/settings.local.json
+
+# Rust
+/target/
+**/target/
+
+# Node / TS
+node_modules/
+dist/
+.vite/
+
+# OS
+.DS_Store
+Thumbs.db

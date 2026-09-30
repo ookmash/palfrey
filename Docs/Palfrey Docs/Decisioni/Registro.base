@@ -1,0 +1,21 @@
+filters:
+  and:
+    - file.inFolder("Decisioni")
+    - file.name != "Decisioni"
+views:
+  - type: table
+    name: Registro
+    order:
+      - file.name
+      - codice
+      - titolo
+      - tema
+      - stato
+      - data
+      - proposto_da
+      - verificato_su
+    sort:
+      - property: stato
+        direction: ASC
+      - property: data
+        direction: DESC

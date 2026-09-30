@@ -1,0 +1,15 @@
+filters:
+  and:
+    - file.inFolder("Roadmap/Sequenza")
+views:
+  - type: table
+    name: Sequenza
+    order:
+      - file.name
+      - titolo
+      - tipo
+      - stato
+      - ordine
+    sort:
+      - property: ordine
+        direction: ASC

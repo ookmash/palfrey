@@ -1,0 +1,26 @@
+name: ADR/code separation
+
+on:
+  pull_request:
+
+jobs:
+  check-separation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Una PR non può toccare insieme Decisioni/ (ADR) e codice
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA")
+          echo "File cambiati:"
+          echo "$CHANGED"
+          TOUCHES_ADR=$(echo "$CHANGED" | grep -c '^Docs/Palfrey Docs/Decisioni/' || true)
+          TOUCHES_OUTSIDE=$(echo "$CHANGED" | grep -vc '^Docs/Palfrey Docs/' || true)
+          if [ "$TOUCHES_ADR" -gt 0 ] && [ "$TOUCHES_OUTSIDE" -gt 0 ]; then
+            echo "::error::Questa PR tocca sia Decisioni/ (ADR) sia file fuori dal vault. Dividila in una PR documentale e una di codice (Governance.md)."
+            exit 1
+          fi
